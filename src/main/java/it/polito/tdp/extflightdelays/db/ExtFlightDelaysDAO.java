@@ -91,4 +91,37 @@ public class ExtFlightDelaysDAO {
 			throw new RuntimeException("Error Connection Database");
 		}
 	}
+	
+	
+	public List<Flight> getAllFlights(){
+		
+		final String sql = "SELECT ORIGIN_AIRPORT_ID , DESTINATION_AIRPORT_ID , DISTANCE "
+				+ "FROM flights ";
+		
+		Connection conn = ConnectDB.getConnection();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet res = st.executeQuery();
+			List<Flight> result = new ArrayList<Flight>();
+			
+			while(res.next()) {
+				result.add(new Flight(res.getInt("ID") , res.getInt("AIRLINE_ID") , res.getInt("FLIGHT_NUMBER") , res.getString("TAIL_NUMBER") , 
+						res.getInt("ORIGIN_AIRPORT_ID") , res.getInt("DESTINATION_AIRPORT_ID") , res.getTimestamp("SCHEDULED_DEPARTURE_DATE").toLocalDateTime() ,
+						res.getDouble("DEPARTURE_DELAY") , res.getDouble("ELAPSED_TIME") , res.getInt("DISTANCE") , res.getTimestamp("ARRIVAL_DATE").toLocalDateTime() , 
+						res.getDouble("ARRIVAL_DELAY")));
+			}
+			
+			conn.close();
+			return result;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+	}
+	
+	
 }
