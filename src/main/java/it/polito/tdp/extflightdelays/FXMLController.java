@@ -35,10 +35,11 @@ public class FXMLController {
 
     @FXML
     void doAnalizzaAeroporti(ActionEvent event) {
+    	txtResult.clear();
     	model.creaGrafo(Integer.parseInt(distanzaMinima.getText()));
     	 
-    	txtResult.appendText("Vertici: " + model.getVertici());
-    	txtResult.appendText("Archi: " + model.getArchi());
+    	txtResult.appendText("Vertici: " + model.getVertici() + "\n");
+    	txtResult.appendText("Archi: " + model.getArchi()+"\n");
     	
     }
 

@@ -95,7 +95,7 @@ public class ExtFlightDelaysDAO {
 	
 	public List<Flight> getAllFlights(){
 		
-		final String sql = "SELECT ORIGIN_AIRPORT_ID , DESTINATION_AIRPORT_ID , DISTANCE "
+		final String sql = "SELECT * "
 				+ "FROM flights ";
 		
 		Connection conn = ConnectDB.getConnection();
